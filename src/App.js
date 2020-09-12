@@ -1,26 +1,51 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import { Bob, Tom, TomAndBob } from './components/Screens.js';
 
-function App() {
+
+
+const App = () => {
+  const [selectedCat, setSelectedCat] = React.useState('');
+
+  const handleSelection = (event) => {
+    event.preventDefault();
+    setSelectedCat(event.target.name);
+  }
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      {selectedCat === 'Tom' ? (
+        <>
+          <Tom />
+          <button onClick={handleSelection} name="Bob">Click to see random Bob</button>
+          <button onClick={handleSelection} name="Tom and Bob">Click to see random Tom and Bob</button>
+        </>
+      )
+        : selectedCat === "Bob" ? (
+          <>
+
+            <Bob />            
+            <button onClick={handleSelection} name="Tom">Click to see random Tom</button>
+            <button onClick={handleSelection} name="Tom and Bob">Click to see random Tom and Bob</button>
+          </>
+        )
+          : selectedCat === 'Tom and Bob' ? (
+            <>
+
+              <TomAndBob />              
+              <button onClick={handleSelection} name="Bob">Click to see random Bob</button>
+              <button onClick={handleSelection} name="Tom">Click to see random Tom</button>
+            </>
+          ) : (
+              <>
+              <h1>      Let's be real.  This year's been hard.  You know what helps?  Random cats.
+</h1>
+                <button onClick={handleSelection} name="Bob">Click to see random Bob</button>
+                <button onClick={handleSelection} name="Tom">Click to see random Tom</button>
+                <button onClick={handleSelection} name="Tom and Bob">Click to see random Tom and Bob</button>
+              </>
+            )
+      }
     </div>
   );
 }
-
 export default App;
